@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Request Access — Paola Canale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0D1B2A;
+      --navy-mid:   #172639;
+      --gold:       #C4973A;
+      --gold-light: #DDB870;
+      --gold-pale:  #EDD9A3;
+      --white:      #FFFFFF;
+      --cream:      #F5F1EA;
+      --muted:      #62778C;
+    }
+
+    html, body {
+      min-height: 100vh;
+      background: var(--navy);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--gold-pale);
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--navy);
+      padding: 9px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: rgba(255,255,255,.38);
+      letter-spacing: .1em;
+      border-bottom: 1px solid rgba(196,151,58,.1);
+    }
+    .topbar a {
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .topbar a:hover { opacity: .7; }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 42px);
+      padding: 48px 24px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 860px;
+      width: 100%;
+      border: 1px solid rgba(196,151,58,.18);
+    }
+
+    /* ── PREVIEW COL ── */
+    .preview-col {
+      background: var(--navy-mid);
+      border-right: 1px solid rgba(196,151,58,.18);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      pointer-events: none;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-topbar {
+      background: rgba(255,255,255,.05);
+      padding: 6px 12px;
+      font-size: 9px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(196,151,58,.45);
+      display: flex;
+      justify-content: space-between;
+    }
+    .preview-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      margin-top: 8px;
+    }
+    .preview-name em { font-style: italic; color: var(--gold-light); }
+    .preview-tag {
+      font-size: 10px;
+      color: rgba(255,255,255,.3);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .preview-divider {
+      width: 30px; height: 1px;
+      background: var(--gold); opacity: .4;
+    }
+    .preview-stat-row { display: flex; gap: 20px; }
+    .preview-stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 600;
+      color: var(--gold-light); line-height: 1;
+    }
+    .preview-stat-l {
+      font-size: 8px; color: rgba(255,255,255,.25);
+      text-transform: uppercase; letter-spacing: .1em; margin-top: 3px;
+    }
+    .preview-nav { display: flex; gap: 8px; flex-wrap: wrap; }
+    .preview-nav span {
+      font-size: 8px; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(255,255,255,.28); padding: 5px 8px;
+      border-bottom: 1.5px solid transparent;
+    }
+    .preview-nav span.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+    .preview-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .preview-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(196,151,58,.15);
+      border-top: 2px solid var(--gold);
+      padding: 10px;
+    }
+    .preview-card-t {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px; font-weight: 600; color: var(--gold-pale);
+    }
+    .preview-card-b {
+      font-size: 8px; color: rgba(255,255,255,.22);
+      margin-top: 4px; line-height: 1.5;
+    }
+    .preview-label {
+      position: absolute; bottom: 14px; left: 0; right: 0;
+      text-align: center; font-size: 9px;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(196,151,58,.3);
+    }
+
+    /* ── FORM COL ── */
+    .form-col {
+      background: var(--navy);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .eyebrow {
+      font-size: 9px; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 10px; font-weight: 500;
+    }
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 300;
+      color: var(--gold-pale); line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .form-title em { font-style: italic; color: var(--gold-light); }
+    .form-sub {
+      font-size: 12px; color: var(--gold-pale);
+      opacity: .5; font-weight: 300;
+      line-height: 1.65; margin-bottom: 28px;
+    }
+    .field-group { margin-bottom: 18px; }
+    .field-label {
+      display: block; font-size: 9px;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold-light); margin-bottom: 6px; font-weight: 500;
+    }
+    .field-input, .field-textarea {
+      width: 100%; background: rgba(255,255,255,.03);
+      border: none; border-bottom: 1px solid rgba(196,151,58,.35);
+      color: var(--gold-pale); font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 300;
+      padding: 9px 4px; outline: none;
+      transition: border-color .2s; border-radius: 0;
+    }
+    .field-input::placeholder, .field-textarea::placeholder {
+      color: rgba(221,184,112,.2);
+    }
+    .field-input:focus, .field-textarea:focus {
+      border-bottom-color: var(--gold-light);
+    }
+    .field-textarea { resize: none; min-height: 68px; }
+
+    .submit-btn {
+      margin-top: 22px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase;
+      padding: 13px 30px; cursor: pointer;
+      transition: background .22s, color .22s;
+      align-self: flex-start;
+    }
+    .submit-btn:hover { background: var(--gold); color: var(--navy); }
+
+    .success-msg {
+      display: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 300;
+      color: var(--gold-light); margin-top: 16px;
+      font-style: italic;
+    }
+    .note {
+      margin-top: 20px; font-size: 10px;
+      color: rgba(196,151,58,.25); letter-spacing: .05em; line-height: 1.6;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .topbar { padding: 9px 20px; }
+      .card { grid-template-columns: 1fr; }
+      .preview-col { display: none; }
+      .form-col { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="index.html">← Paola Canale</a>
+    <span>EU · UK · CH</span>
+  </div>
+
+  <div class="page">
+    <div class="card">
+
+      <!-- PREVIEW -->
+      <div class="preview-col">
+        <div class="preview-topbar">
+          <span>Paola Canale</span>
+          <span>EN · FR · IT</span>
+        </div>
+        <div class="preview-name">Paola<br><em>Canale</em></div>
+        <div class="preview-tag">Finance Transformation &amp; Change Leader</div>
+        <div class="preview-divider"></div>
+        <div class="preview-stat-row">
+          <div class="preview-stat">
+            <div class="preview-stat-n">20+</div>
+            <div class="preview-stat-l">Years</div>
+          </div>
+          <div class="preview-stat">
+            <div class="preview-stat-n">€2B+</div>
+            <div class="preview-stat-l">Managed</div>
+          </div>
+          <div class="preview-stat">
+            <div class="preview-stat-n">4</div>
+            <div class="preview-stat-l">Languages</div>
+          </div>
+        </div>
+        <div class="preview-nav">
+          <span class="active">Finance</span>
+          <span>PMO</span>
+          <span>Data</span>
+          <span>CM</span>
+        </div>
+        <div class="preview-cards">
+          <div class="preview-card">
+            <div class="preview-card-t">FP&amp;A</div>
+            <div class="preview-card-b">Budgeting &amp; forecasting at scale</div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-card-t">ERP</div>
+            <div class="preview-card-b">SAP · Oracle · Transformation</div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-card-t">PMO</div>
+            <div class="preview-card-b">Complex programme delivery</div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-card-t">Data</div>
+            <div class="preview-card-b">BI · Reporting · Analytics</div>
+          </div>
+        </div>
+        <div class="preview-label">preview — full access on request</div>
+      </div>
+
+      <!-- FORM -->
+      <div class="form-col">
+        <p class="eyebrow">Portfolio Access</p>
+        <h1 class="form-title">Request <em>access</em></h1>
+        <p class="form-sub">Leave your details and I'll be in touch shortly.</p>
+
+        <!--
+          FORMSPREE SETUP:
+          1. Go to https://formspree.io and create a free account
+          2. Create a new form → copy your Form ID
+          3. Replace YOUR_FORM_ID below with your actual ID
+             e.g. action="https://formspree.io/f/xpwzgkla"
+        -->
+        <form id="access-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+          <div class="field-group">
+            <label class="field-label" for="email">Email address *</label>
+            <input class="field-input" id="email" name="email" type="email"
+                   placeholder="you@company.com" required />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="role">Your role *</label>
+            <input class="field-input" id="role" name="role" type="text"
+                   placeholder="e.g. CFO, Recruiter, Consultant…" required />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="comments">Comments</label>
+            <textarea class="field-textarea" id="comments" name="comments"
+                      placeholder="Tell me why you're interested…"></textarea>
+          </div>
+
+          <!-- Formspree honeypot anti-spam -->
+          <input type="text" name="_gotcha" style="display:none" />
+          <!-- Redirect after submission -->
+          <input type="hidden" name="_next" value="https://canalepaola.github.io/Paola-Canale/thank-you.html" />
+
+          <button class="submit-btn" type="submit" id="submit-btn">Send request</button>
+        </form>
+
+        <p class="success-msg" id="success-msg">Thank you — I'll get back to you shortly.</p>
+        <p class="note">Your details are used solely to process this request.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('access-form');
+    form.addEventListener('submit', function(e) {
+      const btn = document.getElementById('submit-btn');
+      btn.textContent = 'Sending…';
+      btn.style.opacity = '.5';
+      btn.disabled = true;
+    });
+  </script>
+
+</body>
+</html>

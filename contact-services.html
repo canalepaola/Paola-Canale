@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Work with Me — Paola Canale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0D1B2A;
+      --navy-mid:   #172639;
+      --gold:       #C4973A;
+      --gold-light: #DDB870;
+      --gold-pale:  #EDD9A3;
+      --white:      #FFFFFF;
+    }
+
+    html, body {
+      min-height: 100vh;
+      background: var(--navy);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--gold-pale);
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--navy);
+      padding: 9px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: rgba(255,255,255,.38);
+      letter-spacing: .1em;
+      border-bottom: 1px solid rgba(196,151,58,.1);
+    }
+    .topbar a {
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .topbar a:hover { opacity: .7; }
+
+    /* ── PAGE ── */
+    .page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 42px);
+      padding: 48px 24px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      max-width: 860px;
+      width: 100%;
+      border: 1px solid rgba(196,151,58,.18);
+    }
+
+    /* ── LEFT: intro col ── */
+    .intro-col {
+      background: var(--navy-mid);
+      border-right: 1px solid rgba(196,151,58,.18);
+      padding: 48px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .intro-eyebrow {
+      font-size: 9px; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gold);
+      font-weight: 500; margin-bottom: 12px;
+    }
+    .intro-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 300;
+      color: var(--white); line-height: 1.08;
+    }
+    .intro-title em { font-style: italic; color: var(--gold-light); }
+    .intro-lead {
+      font-size: 12.5px; color: rgba(237,217,163,.55);
+      font-weight: 300; line-height: 1.75;
+      margin-top: 16px;
+    }
+    .intro-divider {
+      width: 30px; height: 1px;
+      background: var(--gold); opacity: .35;
+      margin: 4px 0;
+    }
+    .service-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .service-list li {
+      font-size: 11px; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(221,184,112,.55);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .service-list li::before {
+      content: '';
+      display: inline-block;
+      width: 18px; height: 1px;
+      background: var(--gold); opacity: .5;
+      flex-shrink: 0;
+    }
+    .intro-geo {
+      font-size: 10px; letter-spacing: .12em;
+      color: rgba(196,151,58,.3); text-transform: uppercase;
+    }
+
+    /* ── RIGHT: form col ── */
+    .form-col {
+      background: var(--navy);
+      padding: 44px 40px;
+    }
+    .field-group { margin-bottom: 20px; }
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .field-label {
+      display: block; font-size: 9px;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold-light); margin-bottom: 7px; font-weight: 500;
+    }
+    .field-input, .field-select, .field-textarea {
+      width: 100%; background: rgba(255,255,255,.03);
+      border: none; border-bottom: 1px solid rgba(196,151,58,.32);
+      color: var(--gold-pale);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 300;
+      padding: 9px 4px; outline: none;
+      transition: border-color .2s; border-radius: 0;
+      appearance: none; -webkit-appearance: none;
+    }
+    .field-input::placeholder, .field-textarea::placeholder {
+      color: rgba(221,184,112,.2);
+    }
+    .field-input:focus, .field-select:focus, .field-textarea:focus {
+      border-bottom-color: var(--gold-light);
+    }
+    .field-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C4973A' opacity='.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+      padding-right: 20px;
+      cursor: pointer;
+    }
+    .field-select option {
+      background: var(--navy-mid);
+      color: var(--gold-pale);
+    }
+    .field-textarea { resize: none; min-height: 80px; }
+
+    /* Services checkboxes */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .service-check {
+      display: flex; align-items: center; gap: 10px;
+      cursor: pointer;
+      padding: 9px 10px;
+      border: 1px solid rgba(196,151,58,.15);
+      transition: border-color .2s, background .2s;
+    }
+    .service-check:hover {
+      border-color: rgba(196,151,58,.35);
+      background: rgba(255,255,255,.03);
+    }
+    .service-check input[type="checkbox"] {
+      accent-color: var(--gold);
+      width: 13px; height: 13px;
+      flex-shrink: 0; cursor: pointer;
+    }
+    .service-check-label {
+      font-size: 11px; letter-spacing: .06em;
+      color: rgba(237,217,163,.65); font-weight: 300;
+    }
+    .service-check:has(input:checked) {
+      border-color: rgba(196,151,58,.5);
+      background: rgba(196,151,58,.06);
+    }
+    .service-check:has(input:checked) .service-check-label {
+      color: var(--gold-light);
+    }
+
+    .submit-btn {
+      margin-top: 24px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase;
+      padding: 13px 32px; cursor: pointer;
+      transition: background .22s, color .22s;
+      display: inline-block;
+    }
+    .submit-btn:hover { background: var(--gold); color: var(--navy); }
+    .submit-btn:disabled { opacity: .4; cursor: default; }
+
+    .success-msg {
+      display: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 300;
+      color: var(--gold-light); margin-top: 18px;
+      font-style: italic;
+    }
+    .note {
+      margin-top: 18px; font-size: 10px;
+      color: rgba(196,151,58,.25); letter-spacing: .05em; line-height: 1.6;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .topbar { padding: 9px 20px; }
+      .card { grid-template-columns: 1fr; }
+      .intro-col { padding: 32px 24px; gap: 20px; }
+      .form-col { padding: 32px 24px; }
+      .field-row { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="index.html">← Paola Canale</a>
+    <span>EU · UK · CH</span>
+  </div>
+
+  <div class="page">
+    <div class="card">
+
+      <!-- INTRO -->
+      <div class="intro-col">
+        <div>
+          <p class="intro-eyebrow">Work with me</p>
+          <h1 class="intro-title">Let's work<br><em>together</em></h1>
+          <p class="intro-lead">
+            Available for senior advisory and transformation engagements across Europe.
+            Tell me about your project and I'll get back to you within 48 hours.
+          </p>
+        </div>
+
+        <div>
+          <div class="intro-divider"></div>
+          <ul class="service-list">
+            <li>Finance Transformation</li>
+            <li>Change Management</li>
+            <li>PMO / Project Management</li>
+            <li>Advisory &amp; Consulting</li>
+          </ul>
+        </div>
+
+        <p class="intro-geo">Lausanne · EU · UK · CH engagements</p>
+      </div>
+
+      <!-- FORM -->
+      <div class="form-col">
+
+        <!--
+          FORMSPREE SETUP:
+          1. Go to https://formspree.io → create free account
+          2. Create a new form → copy your Form ID
+          3. Replace YOUR_FORM_ID below with your actual ID
+        -->
+        <form id="services-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+          <div class="field-row">
+            <div>
+              <label class="field-label" for="name">Full name *</label>
+              <input class="field-input" id="name" name="name" type="text"
+                     placeholder="Jane Smith" required />
+            </div>
+            <div>
+              <label class="field-label" for="email">Email *</label>
+              <input class="field-input" id="email" name="email" type="email"
+                     placeholder="jane@company.com" required />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div>
+              <label class="field-label" for="company">Company</label>
+              <input class="field-input" id="company" name="company" type="text"
+                     placeholder="Your organisation" />
+            </div>
+            <div>
+              <label class="field-label" for="duration">Project duration</label>
+              <select class="field-select" id="duration" name="duration">
+                <option value="" disabled selected>Select…</option>
+                <option>Less than 1 month</option>
+                <option>1 – 3 months</option>
+                <option>3 – 6 months</option>
+                <option>6 – 12 months</option>
+                <option>Over 12 months</option>
+                <option>To be defined</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">Area of engagement *</label>
+            <div class="services-grid">
+              <label class="service-check">
+                <input type="checkbox" name="service" value="Finance Transformation" />
+                <span class="service-check-label">Finance Transformation</span>
+              </label>
+              <label class="service-check">
+                <input type="checkbox" name="service" value="Change Management" />
+                <span class="service-check-label">Change Management</span>
+              </label>
+              <label class="service-check">
+                <input type="checkbox" name="service" value="PMO / Project Management" />
+                <span class="service-check-label">PMO / Project Mgmt</span>
+              </label>
+              <label class="service-check">
+                <input type="checkbox" name="service" value="Advisory / Consulting" />
+                <span class="service-check-label">Advisory / Consulting</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="message">Tell me about your project *</label>
+            <textarea class="field-textarea" id="message" name="message"
+                      placeholder="Briefly describe your challenge or objective…" required></textarea>
+          </div>
+
+          <!-- Formspree honeypot anti-spam -->
+          <input type="text" name="_gotcha" style="display:none" />
+          <input type="hidden" name="_next" value="https://canalepaola.github.io/Paola-Canale/thank-you.html" />
+
+          <button class="submit-btn" type="submit" id="submit-btn">Send enquiry</button>
+        </form>
+
+        <p class="success-msg" id="success-msg">Thank you — I'll be in touch within 48 hours.</p>
+        <p class="note">Your details are used solely to respond to your enquiry.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('services-form');
+    form.addEventListener('submit', function() {
+      const btn = document.getElementById('submit-btn');
+      btn.textContent = 'Sending…';
+      btn.style.opacity = '.5';
+      btn.disabled = true;
+    });
+  </script>
+
+</body>
+</html>

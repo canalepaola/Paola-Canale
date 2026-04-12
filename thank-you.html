@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You — Paola Canale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0D1B2A;
+      --navy-mid:   #172639;
+      --gold:       #C4973A;
+      --gold-light: #DDB870;
+      --gold-pale:  #EDD9A3;
+      --white:      #FFFFFF;
+    }
+
+    html, body {
+      min-height: 100vh;
+      background: var(--navy);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--gold-pale);
+    }
+
+    .topbar {
+      padding: 9px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: rgba(255,255,255,.38);
+      letter-spacing: .1em;
+      border-bottom: 1px solid rgba(196,151,58,.1);
+    }
+    .topbar a {
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .topbar a:hover { opacity: .7; }
+
+    .page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 42px);
+      padding: 48px 24px;
+    }
+
+    .card {
+      max-width: 560px;
+      width: 100%;
+      border: 1px solid rgba(196,151,58,.18);
+      background: var(--navy-mid);
+      padding: 60px 52px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .icon {
+      width: 48px; height: 48px;
+      border: 1px solid rgba(196,151,58,.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 28px;
+    }
+    .icon svg { width: 20px; height: 20px; }
+
+    .eyebrow {
+      font-size: 9px; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gold);
+      font-weight: 500; margin-bottom: 14px;
+    }
+
+    .title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px; font-weight: 300;
+      color: var(--white); line-height: 1.08;
+      margin-bottom: 6px;
+    }
+    .title em { font-style: italic; color: var(--gold-light); }
+
+    .subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 300;
+      font-style: italic; color: var(--gold-light);
+      margin-bottom: 24px;
+    }
+
+    .divider {
+      width: 36px; height: 1px;
+      background: var(--gold); opacity: .35;
+      margin: 0 auto 24px;
+    }
+
+    .body {
+      font-size: 13px; color: rgba(237,217,163,.5);
+      font-weight: 300; line-height: 1.75;
+      max-width: 380px;
+      margin-bottom: 40px;
+    }
+
+    .back-btn {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase;
+      padding: 13px 32px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .22s, color .22s;
+    }
+    .back-btn:hover { background: var(--gold); color: var(--navy); }
+
+    .geo {
+      margin-top: 36px;
+      font-size: 10px; letter-spacing: .12em;
+      color: rgba(196,151,58,.25); text-transform: uppercase;
+    }
+
+    @media (max-width: 480px) {
+      .topbar { padding: 9px 20px; }
+      .card { padding: 40px 28px; }
+      .title { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="index.html">← Paola Canale</a>
+    <span>EU · UK · CH</span>
+  </div>
+
+  <div class="page">
+    <div class="card">
+
+      <div class="icon">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 10.5L8 14.5L16 6.5" stroke="#DDB870" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <p class="eyebrow">Message received</p>
+      <h1 class="title">Thank <em>you</em></h1>
+      <p class="subtitle">I'll be in touch shortly.</p>
+
+      <div class="divider"></div>
+
+      <p class="body">
+        Your message has been received. I personally review every enquiry
+        and will get back to you within 48 hours.
+      </p>
+
+      <a class="back-btn" href="index.html">Back to portfolio</a>
+
+      <p class="geo">Lausanne · Switzerland</p>
+
+    </div>
+  </div>
+
+</body>
+</html>
